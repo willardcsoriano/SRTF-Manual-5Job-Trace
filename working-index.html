@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRTF Manual Trace (5 Jobs)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2563eb', // Blue-700
+                        'secondary': '#10b981', // Emerald-500
+                        'accent': '#f59e0b', // Amber-500
+                        'background-light': '#f3f4f6', // Gray-100
+                        'card-bg': '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-background-light min-h-screen font-sans">
+
+    <header class="bg-gray-800 text-white shadow-lg p-4 text-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center space-y-1 md:space-y-0 md:space-x-6">
+            <div class="flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-6">
+                <p>Name: <span class="font-bold">Willard Soriano</span></p>
+                <p>Section: <span class="font-bold">CSS142_FOPI01_4Q2324</span></p>
+            </div>
+            <div class="flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-6 md:text-right">
+                <p>Course: <span class="font-bold">Modeling and Simulation Theory</span></p>
+                <p>Activity: <span class="font-bold">ASS2.1 (Manual SRTF)</span></p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-center text-gray-800 mb-6">
+            <span class="text-primary">SRTF Scheduling:</span> Manual Trace (5 Jobs)
+        </h1>
+
+        <section class="bg-card-bg shadow-xl rounded-lg p-6 mb-8 border-t-4 border-primary">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-3 border-b pb-2">📋 Input Processes & Instructions</h2>
+            <p class="text-gray-600 mb-4 text-base">
+                This simulation is designed for <strong>manual tracing and verification</strong> of the Shortest-Remaining-Time-First (SRTF) algorithm. We use <strong>5 predefined processes</strong> where the <strong>Burst Time (BT) is fixed</strong> and the <strong>Arrival Time (AT) is variable</strong>.
+            </p>
+            
+            <div id="process-input-table-container" class="overflow-x-auto">
+                </div>
+        </section>
+
+        <section class="bg-white shadow-xl rounded-lg p-6 mb-8 border-t-4 border-secondary">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-3 border-b pb-2">🧠 Algorithm Logic: SRTF (Preemptive SJN)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-600">
+                <div>
+                    <p class="font-bold mb-1 text-gray-800">Key Principle:</p>
+                    <p class="text-sm">SRTF is a <strong>preemptive</strong> scheduling algorithm. It always selects the process in the ready queue with the minimum <strong>remaining</strong> execution time to run next.  </p>
+                </div>
+                <div>
+                    <p class="font-bold mb-1 text-gray-800">Preemption Rule:</p>
+                    <p class="text-sm">Preemption occurs at any time $t$ if a newly arriving process has a remaining burst time that is shorter than the remaining burst time of the currently running process.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="flex justify-center mb-8">
+            <button id="run-button" onclick="runSimulation()"
+                class="bg-primary hover:bg-blue-600 text-white font-bold py-3 px-10 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 text-lg">
+                Run Simulation & Generate Trace
+            </button>
+        </div>
+
+        <div id="result" class="hidden transition-all duration-500 bg-white shadow-2xl rounded-lg p-6 border-t-4 border-accent">
+            <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-6">📊 Trace Results & Performance Metrics</h2>
+
+            <section class="mb-8">
+                <h3 class="text-xl font-bold text-gray-700 mb-3 border-b pb-1">Gantt Chart (CPU Execution Timeline)</h3>
+                <div id="gantt-chart" class="overflow-x-auto p-4 border rounded-lg bg-gray-50 min-h-[50px]">
+                    </div>
+            </section>
+            
+            <section class="mb-6">
+                <h3 class="text-xl font-bold text-gray-700 mb-3 border-b pb-1">Final Metrics Table</h3>
+                <div id="metrics-table-container" class="overflow-x-auto">
+                    </div>
+            </section>
+
+            <div id="averages" class="p-4 bg-accent/10 border border-accent rounded-lg text-center font-semibold text-gray-800">
+                </div>
+        </div>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>

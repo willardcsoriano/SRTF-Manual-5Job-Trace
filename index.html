@@ -1,32 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SRTF Scheduling Simulation</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="favicon.png" type="image/png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRTF Manual Trace (5 Jobs)</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Theme Config -->
+    <script type="module">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#10b981",
+                        accent: "#f59e0b",
+                        "background-light": "#f3f4f6",
+                        "card-bg": "#ffffff",
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- MathJax -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [["$", "$"], ["\\(", "\\)"]] }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
 </head>
-<body>
-    <p class="head">Name: Willard Soriano <span class="align-right">Course: Modeling and Simulation Theory</span></p>
-    <p class="head">Section: CSS142_FOPI01_4Q2324 <span class="align-right">Activity: ASS2.1</span></p>
-    
-    <h1>Shortest-Remaining-Time-First Scheduling Simulation</h1>
-    
-    <section>
-        <h2>About the Simulation</h2>
-        <p>This simulation demonstrates the Shortest-Remaining-Time-First (SRTF) scheduling algorithm. SRTF is a preemptive version of the Shortest Job Next (SJN) scheduling algorithm. In this simulation, we have 5 processes with randomly generated burst times and unique arrival times ranging from 0 to 4.</p>
-    </section>
 
-    <section>
-        <h2>How the Algorithm Works</h2>
-        <p>The SRTF algorithm selects the process with the smallest remaining execution time to execute next. If a new process arrives with a shorter remaining time than the current process, the algorithm preempts the current process and schedules the new process. This ensures that the process with the shortest remaining time is always being executed.</p>
-    </section>
+<body class="bg-background-light min-h-screen font-sans">
 
-    <button onclick="runSimulation()">Run Simulation</button>
+    <!-- HEADER -->
+    <header class="bg-gray-800 text-white shadow-lg p-4 text-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
 
-    <div id="result"></div>
-    
-    <script src="script.js"></script>
+            <div class="flex flex-col sm:flex-row gap-1 sm:gap-6">
+                <p>Name: <span class="font-bold">Willard Soriano</span></p>
+                <p>Section: <span class="font-bold">CSS142_FOPI01_4Q2324</span></p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-1 sm:gap-6 text-left md:text-right">
+                <p>Course: <span class="font-bold">Modeling and Simulation Theory</span></p>
+                <p>Activity: <span class="font-bold">ASS2.1 (Manual SRTF)</span></p>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <h1 class="text-3xl md:text-4xl font-extrabold text-center text-gray-800 mb-6">
+            <span class="text-primary">SRTF Scheduling:</span> Manual Trace (5 Jobs)
+        </h1>
+
+        <!-- INPUT SECTION -->
+        <section class="bg-card-bg shadow-xl rounded-lg p-6 mb-8 border-t-4 border-primary">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-3 border-b pb-2">
+                📋 Input Processes & Instructions
+            </h2>
+
+            <p class="text-gray-600 mb-4 text-base">
+                This simulation is designed for <strong>manual tracing and verification</strong> of the 
+                Shortest-Remaining-Time-First (SRTF) algorithm. We use 
+                <strong>5 predefined processes</strong> where the 
+                <strong>Burst Time (BT) is fixed</strong> and the 
+                <strong>Arrival Time (AT) is variable</strong>.
+            </p>
+
+            <div id="process-input-table-container" class="overflow-x-auto"></div>
+        </section>
+
+        <!-- ALGORITHM LOGIC SECTION -->
+        <section class="bg-white shadow-xl rounded-lg p-6 mb-8 border-t-4 border-secondary">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-3 border-b pb-2">
+                🧠 Algorithm Logic: SRTF (Preemptive SJN)
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-600">
+                <div>
+                    <p class="font-bold text-gray-800 mb-1">Key Principle:</p>
+                    <p class="text-sm">
+                        SRTF is a <strong>preemptive</strong> scheduling algorithm. It always selects the 
+                        process in the ready queue with the minimum <strong>remaining</strong> execution time.
+                    </p>
+                </div>
+                <div>
+                    <p class="font-bold text-gray-800 mb-1">Preemption Rule:</p>
+                    <p class="text-sm">
+                        Preemption occurs at any time \( t \) when a newly arriving process has a shorter 
+                        remaining burst time than the currently running process.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- RUN BUTTON -->
+        <div class="flex justify-center mb-8">
+            <button 
+                id="run-button"
+                class="bg-primary hover:bg-blue-600 text-white font-bold py-3 px-10 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 text-lg"
+            >
+                Run Simulation & Generate Trace
+            </button>
+        </div>
+
+        <!-- RESULT SECTION -->
+        <div 
+            id="result"
+            class="hidden bg-white shadow-2xl rounded-lg p-6 border-t-4 border-accent transition-all duration-500"
+        >
+            <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-6">
+                📊 Trace Results & Performance Metrics
+            </h2>
+
+            <!-- GANTT -->
+            <section class="mb-8">
+                <h3 class="text-xl font-bold text-gray-700 mb-3 border-b pb-1">
+                    Gantt Chart (CPU Execution Timeline)
+                </h3>
+                <div id="gantt-chart" class="overflow-x-auto p-4 border rounded-lg bg-gray-50 min-h-[50px]"></div>
+            </section>
+
+            <!-- METRICS -->
+            <section class="mb-6">
+                <h3 class="text-xl font-bold text-gray-700 mb-3 border-b pb-1">
+                    Final Metrics Table
+                </h3>
+                <div id="metrics-table-container" class="overflow-x-auto"></div>
+            </section>
+
+            <!-- AVERAGES -->
+            <div
+                id="averages"
+                class="p-4 bg-accent/10 border border-accent rounded-lg text-center font-semibold text-gray-800"
+            ></div>
+        </div>
+
+    </main>
+
+    <!-- MAIN APPLICATION SCRIPT (MODULE) -->
+    <script type="module" src="js/app.js"></script>
+
 </body>
 </html>
