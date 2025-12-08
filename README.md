@@ -102,11 +102,11 @@ This tool computes all metrics automatically.
 
 ## 📸 Screenshots (Preview)
 
-<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/11ea6e61-47c5-436b-a507-03645e3ed4f3" />
+<img width="1295" height="573" alt="image" src="https://github.com/user-attachments/assets/2bbe108f-b987-4400-b867-b16d4675b244" />
 
 
 ### Input & Instructions Section
-<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/160c78e9-4331-4a3f-8dca-024913f7b95a" />
+<img width="1211" height="483" alt="image" src="https://github.com/user-attachments/assets/231f0d01-1805-4a2c-8f7c-23e6ffd50cb8" />
 
 ### Gantt Chart
 <img width="1209" height="281" alt="image" src="https://github.com/user-attachments/assets/983ae7cb-cab1-4d80-a690-0a0973eeccc4" />
