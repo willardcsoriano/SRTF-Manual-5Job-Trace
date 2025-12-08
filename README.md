@@ -102,16 +102,17 @@ This tool computes all metrics automatically.
 
 ## 📸 Screenshots (Preview)
 
-> *(Replace with your own screenshots)*
+<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/11ea6e61-47c5-436b-a507-03645e3ed4f3" />
+
 
 ### Input & Instructions Section
-![Screenshot Placeholder](https://via.placeholder.com/800x300?text=Input+Section)
+<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/160c78e9-4331-4a3f-8dca-024913f7b95a" />
 
 ### Gantt Chart
-![Screenshot Placeholder](https://via.placeholder.com/800x300?text=Gantt+Chart)
+<img width="1209" height="281" alt="image" src="https://github.com/user-attachments/assets/983ae7cb-cab1-4d80-a690-0a0973eeccc4" />
 
 ### Final Metrics Table
-![Screenshot Placeholder](https://via.placeholder.com/800x300?text=Metrics+Table)
+<img width="1205" height="351" alt="image" src="https://github.com/user-attachments/assets/dad5d8fe-f183-47e1-9acc-b8cb15aef422" />
 
 ---
 
