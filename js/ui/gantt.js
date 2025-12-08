@@ -21,30 +21,32 @@ function getColor(name) {
  * @param {Array<{name:string,start:number,end:number}>} schedule
  */
 export function renderGanttChart(container, schedule) {
+    const totalTime = schedule[schedule.length - 1].end;
+
     const wrapper = document.createElement("div");
     wrapper.className = "relative mt-6";
 
     const barRow = document.createElement("div");
-    barRow.className = "flex flex-row overflow-x-auto border border-gray-300 rounded-lg shadow-inner";
+    barRow.className = "flex flex-row border border-gray-300 rounded-lg shadow-inner w-full";
 
     let ticks = "";
     let lastTime = 0;
 
     schedule.forEach(seg => {
         const duration = seg.end - seg.start;
-        const width = `w-[${duration * 2}rem]`;
+        const percent = (duration / totalTime) * 100;
 
         const block = `
-            <div class="h-10 ${width} ${getColor(seg.name)} text-white
-                        text-xs font-semibold flex items-center justify-center
-                        border-r border-gray-900/20 shadow-md">
+            <div class="h-10 flex-grow-0 flex-shrink-0 basis-[${percent}%]
+                        ${getColor(seg.name)} text-white text-xs font-semibold 
+                        flex items-center justify-center border-r border-gray-900/20 shadow-md">
                 ${seg.name}
             </div>
         `;
         barRow.insertAdjacentHTML("beforeend", block);
 
         ticks += `
-            <div style="left: calc(${seg.start * 2}rem - 0.25rem);"
+            <div style="left: calc(${(seg.start / totalTime) * 100}% - 0.25rem);"
                  class="absolute text-xs text-gray-600">
                 <div class="h-1 w-0.5 bg-gray-600 mb-1"></div>${seg.start}
             </div>
@@ -53,8 +55,9 @@ export function renderGanttChart(container, schedule) {
         lastTime = seg.end;
     });
 
+    // Final tick
     ticks += `
-        <div style="left: calc(${lastTime * 2}rem - 0.25rem);"
+        <div style="left: calc(100% - 0.25rem);"
              class="absolute text-xs text-gray-600">
             <div class="h-1 w-0.5 bg-gray-600 mb-1"></div>${lastTime}
         </div>

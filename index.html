@@ -61,22 +61,15 @@
             <span class="text-primary">SRTF Scheduling:</span> Manual Trace (5 Jobs)
         </h1>
 
-        <!-- INPUT SECTION -->
-        <section class="bg-card-bg shadow-xl rounded-lg p-6 mb-8 border-t-4 border-primary">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-3 border-b pb-2">
-                📋 Input Processes & Instructions
-            </h2>
-
-            <p class="text-gray-600 mb-4 text-base">
-                This simulation is designed for <strong>manual tracing and verification</strong> of the 
-                Shortest-Remaining-Time-First (SRTF) algorithm. We use 
-                <strong>5 predefined processes</strong> where the 
-                <strong>Burst Time (BT) is fixed</strong> and the 
-                <strong>Arrival Time (AT) is variable</strong>.
-            </p>
-
-            <div id="process-input-table-container" class="overflow-x-auto"></div>
-        </section>
+        <!-- RUN BUTTON -->
+        <div class="flex justify-center mb-8">
+            <button 
+                id="run-button"
+                class="bg-primary hover:bg-blue-600 text-white font-bold py-3 px-10 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 text-lg"
+            >
+                Run Simulation & Generate Trace
+            </button>
+        </div>
 
         <!-- ALGORITHM LOGIC SECTION -->
         <section class="bg-white shadow-xl rounded-lg p-6 mb-8 border-t-4 border-secondary">
@@ -102,15 +95,22 @@
             </div>
         </section>
 
-        <!-- RUN BUTTON -->
-        <div class="flex justify-center mb-8">
-            <button 
-                id="run-button"
-                class="bg-primary hover:bg-blue-600 text-white font-bold py-3 px-10 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 text-lg"
-            >
-                Run Simulation & Generate Trace
-            </button>
-        </div>
+        <!-- INPUT SECTION -->
+        <section class="bg-card-bg shadow-xl rounded-lg p-6 mb-8 border-t-4 border-primary">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-3 border-b pb-2">
+                📋 Input Processes & Instructions
+            </h2>
+
+            <p class="text-gray-600 mb-4 text-base">
+                This simulation is designed for <strong>manual tracing and verification</strong> of the 
+                Shortest-Remaining-Time-First (SRTF) algorithm. We use 
+                <strong>5 predefined processes</strong> where the 
+                <strong>Burst Time (BT) is fixed</strong> and the 
+                <strong>Arrival Time (AT) is variable</strong>.
+            </p>
+
+            <div id="process-input-table-container" class="overflow-x-auto"></div>
+        </section>
 
         <!-- RESULT SECTION -->
         <div 

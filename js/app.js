@@ -12,46 +12,57 @@ let initialProcesses = [];
 
 console.log("app.js loaded!");
 
+// Helper: deep clone array of Process objects using the built-in clone()
+function cloneProcessArray(list) {
+    return list.map(p => p.clone());
+}
 
 /**
- * Orchestrates a full simulation run:
- *  1. Render input table
- *  2. Run SRTF
- *  3. Render Gantt chart
- *  4. Render metrics table
- *  5. Show average WT/TAT
+ * Full simulation workflow:
+ *  1) Regenerate fresh processes
+ *  2) Render input table
+ *  3) Run SRTF (on cloned data)
+ *  4) Render Gantt chart + Metrics
+ *  5) Show averages
  */
 function runSimulation() {
+    console.log("Running simulation...");
+
+    // 1. Always regenerate NEW processes for each click
+    initialProcesses = generateInitialProcesses();
+
     const inputContainer   = document.getElementById("process-input-table-container");
     const resultSection    = document.getElementById("result");
     const ganttContainer   = document.getElementById("gantt-chart");
     const metricsContainer = document.getElementById("metrics-table-container");
     const averagesDiv      = document.getElementById("averages");
 
-    if (!initialProcesses || initialProcesses.length === 0) {
-        // Fallback in case something went wrong
-        initialProcesses = generateInitialProcesses();
-    }
-
-    // 1. Render the input table
+    // 2. Render fresh input table
     renderInputTable(inputContainer, initialProcesses);
 
-    // 2. Run SRTF on a fresh copy (core does its own cloning)
-    const { schedule, finalProcesses } = runSRTF(initialProcesses);
+    // 3. Run SRTF on a *separate cloned array* (prevents mutation issues)
+    const processesForSimulation = cloneProcessArray(initialProcesses);
+    const { schedule, finalProcesses } = runSRTF(processesForSimulation);
 
-    // 3. Show result section
+    // 4. Make result section visible
     resultSection.classList.remove("hidden");
 
-    // 4. Render Gantt chart
+    // Clear previous output
+    ganttContainer.innerHTML = "";
+    metricsContainer.innerHTML = "";
+    averagesDiv.innerHTML = "";
+
+    // Render Gantt chart
     renderGanttChart(ganttContainer, schedule);
 
-    // 5. Render metrics table with sorting callback
+    // Render metrics table + sorting callback
     renderMetricsTable(metricsContainer, finalProcesses, (colIndex) => {
         sortMetricsTable(colIndex);
     });
 
-    // 6. Compute and render averages
+    // 5. Compute averages
     const { avgWT, avgTAT } = calculateAverages(finalProcesses);
+
     averagesDiv.innerHTML = `
         <p>Average Waiting Time (WT): 
             <span class="text-red-700 font-extrabold">${avgWT.toFixed(2)}</span> time units
@@ -62,9 +73,9 @@ function runSimulation() {
     `;
 }
 
-// Initialize once DOM is ready
+// Attach button listener AFTER DOM loads
 window.addEventListener("DOMContentLoaded", () => {
-    initialProcesses = generateInitialProcesses();
+    console.log("DOM loaded.");
 
     const runButton = document.getElementById("run-button");
     if (runButton) {
@@ -72,6 +83,5 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
- 
-// Expose for the existing inline onclick="runSimulation()" in the HTML
+// Expose for debugging or inline HTML calls (if ever needed)
 window.runSimulation = runSimulation;
