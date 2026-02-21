@@ -38,18 +38,21 @@
 <body class="bg-background-light min-h-screen font-sans">
 
     <!-- HEADER -->
-    <header class="bg-gray-800 text-white shadow-lg p-4 text-sm">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+    <header class="bg-gray-900 border-b-2 border-primary shadow-sm px-4 sm:px-6 py-3 sm:py-4 text-sm">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-y-2">
 
-            <div class="flex flex-col sm:flex-row gap-1 sm:gap-6">
-                <p>Name: <span class="font-bold">Willard Soriano</span></p>
-                <p>Section: <span class="font-bold">CSS142_FOPI01_4Q2324</span></p>
+            <div class="flex items-center gap-x-3">
+                <div class="bg-primary text-white font-extrabold text-xs px-2 py-1 rounded tracking-widest uppercase">
+                    SRTF
+                </div>
+                <span class="text-gray-200 font-semibold tracking-wide text-sm sm:text-base">Manual Trace</span>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-1 sm:gap-6 text-left md:text-right">
-                <p>Course: <span class="font-bold">Modeling and Simulation Theory</span></p>
-                <p>Activity: <span class="font-bold">ASS2.1 (Manual SRTF)</span></p>
-            </div>
+            <nav class="flex flex-wrap items-center gap-x-2 sm:gap-x-3 gap-y-1 text-xs text-gray-500 uppercase tracking-wider">
+                <span class="hidden sm:inline">Modeling & Simulation</span>
+                <span class="hidden sm:inline text-gray-700">•</span>
+                <span>CPU Scheduling</span>
+            </nav>
 
         </div>
     </header>
@@ -145,6 +148,29 @@
         </div>
 
     </main>
+
+    <footer class="bg-gray-900 border-t border-gray-700 px-4 sm:px-6 py-3 sm:py-4 mt-8 text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-y-2">
+
+            <p class="text-xs sm:text-sm">
+                Designed & built by
+                <span class="text-gray-200 font-semibold">Willard Soriano</span>
+            </p>
+
+            <div class="flex items-center gap-x-3 sm:gap-x-4">
+                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-primary transition duration-200 uppercase tracking-wider text-xs sm:text-sm">
+                    GitHub
+                </a>
+                <span class="text-gray-700">|</span>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-primary transition duration-200 uppercase tracking-wider text-xs sm:text-sm">
+                    LinkedIn
+                </a>
+            </div>
+
+        </div>
+    </footer>
 
     <!-- MAIN APPLICATION SCRIPT (MODULE) -->
     <script type="module" src="js/app.js"></script>
